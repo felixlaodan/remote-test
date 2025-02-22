@@ -1,0 +1,34 @@
+def find_chatting_maniac():
+    n = int(input())
+    phone_counts = {}
+
+    for _ in range(n):
+        record = input().split()
+        caller = record[0]
+        receiver = record[1]
+
+        phone_counts[caller] = phone_counts.get(caller, 0) + 1
+        phone_counts[receiver] = phone_counts.get(receiver, 0) + 1
+
+    max_count = 0
+    chatting_maniac = None
+    maniac_count = 0
+
+    for phone, count in phone_counts.items():
+        if count > max_count:
+            max_count = count
+            chatting_maniac = phone
+            maniac_count = 1
+        elif count == max_count:
+            if chatting_maniac is None or phone < chatting_maniac:
+                chatting_maniac = phone
+            maniac_count += 1
+
+
+    if maniac_count > 1:
+        print(chatting_maniac, max_count, maniac_count)
+    else:
+        print(chatting_maniac, max_count)
+
+if __name__ == "__main__":
+    find_chatting_maniac()
